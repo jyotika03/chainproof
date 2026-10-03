@@ -10,7 +10,7 @@ In the synthetic fixture, two late inputs affect the same order. Summing full or
 
 Moving S-101's arrival to 6 October reduces exposure to **INR 1,200,000**. O-202 recovers, but O-201 remains exposed because S-102 is still late. This is a hypothetical reduction in exposure, not guaranteed savings or predicted revenue loss.
 
-The data model and these acceptance checks have been executed in Snowflake through CoCo CLI. See [deployment evidence](DEPLOYMENT_VALIDATION.md) for actual SQL, outputs, and query IDs. CoCo deployed the Streamlit object and verified four AI classification cases. Browser startup then exposed a Python package-resolution error; deployment repair and end-to-end UI validation remain pending. See [application validation](APP_VALIDATION.md). No hackathon submission has been made yet.
+The data model and these acceptance checks have been executed in Snowflake through CoCo CLI. See [deployment evidence](DEPLOYMENT_VALIDATION.md) for actual SQL, outputs, and query IDs. The deployed app passed browser checks for total exposure, customer evidence, duplicate-counting audit, unsupported requests, and the arrival scenario. See [browser evidence](BROWSER_VALIDATION.md) and [question-flow repair](QUESTION_FLOW_VALIDATION.md). No hackathon submission has been made yet.
 
 ## Run the local demonstration
 
@@ -59,7 +59,7 @@ Examples:
 - Why is Northstar Mobility exposed?
 - Why does a naive join overstate exposure?
 
-Unsupported requests, unknown customers, malformed model output, unavailable AI models, and forecasting questions produce an explicit error or clarification. There is no silent fallback to a fabricated live answer. CoCo verified model availability and four classifications in APP_VALIDATION.md; the browser workflow is awaiting deployment repair.
+Unsupported requests, unknown customers, malformed model output, unavailable AI models, and forecasting questions produce an explicit error or clarification. There is no silent fallback to a fabricated live answer. CoCo verified model availability and four classifications in APP_VALIDATION.md; all four routes subsequently passed in the deployed browser UI.
 
 ## Model and definitions
 

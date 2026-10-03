@@ -29,16 +29,23 @@ def load_live(session):
             'orders':tables['CP_ORDERS'], 'allocations':tables['CP_ALLOCATIONS']}, governed[0], trace
 
 
+def _strip_fences(text):
+    """Remove optional markdown code fences from a string."""
+    text = text.strip()
+    if text.startswith('```'):
+        text = text.split('\n', 1)[1] if '\n' in text else text[3:]
+        text = text.rsplit('```', 1)[0]
+    return text
+
+
 def parse_route(raw, customers):
     """Reject malformed or out-of-scope model output. It never becomes SQL."""
     if isinstance(raw, str):
-        text = raw.strip()
-        if text.startswith('```'):
-            text = text.split('\n', 1)[1] if '\n' in text else text[3:]
-            text = text.rsplit('```', 1)[0]
-        value = json.loads(text)
+        value = json.loads(_strip_fences(raw))
     else:
         value = raw
+    if isinstance(value, str):
+        value = json.loads(_strip_fences(value))
     if not isinstance(value, dict) or set(value) != {'intent', 'customer'}:
         raise ValueError('The question could not be mapped to a supported analysis.')
     if value['intent'] not in INTENTS:
