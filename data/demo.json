@@ -1,0 +1,22 @@
+{
+  "synthetic": true,
+  "snapshot_date": "2026-10-03",
+  "shipments": [
+    {"id":"S-101","supplier":"Aster Components","part":"Control module","plant":"Pune","arrival":"2026-10-09"},
+    {"id":"S-102","supplier":"Birch Precision","part":"Valve assembly","plant":"Pune","arrival":"2026-10-08"},
+    {"id":"S-103","supplier":"Cedar Systems","part":"Sensor kit","plant":"Chennai","arrival":"2026-10-05"}
+  ],
+  "orders": [
+    {"id":"O-201","customer":"Northstar Mobility","needed":"2026-10-06","value_inr":1200000},
+    {"id":"O-202","customer":"Harbor Machines","needed":"2026-10-07","value_inr":800000},
+    {"id":"O-203","customer":"Meadow Equipment","needed":"2026-10-06","value_inr":500000},
+    {"id":"O-204","customer":"Orion Manufacturing","needed":"2026-10-10","value_inr":900000}
+  ],
+  "allocations": [
+    {"shipment_id":"S-101","order_id":"O-201"},
+    {"shipment_id":"S-102","order_id":"O-201"},
+    {"shipment_id":"S-101","order_id":"O-202"},
+    {"shipment_id":"S-103","order_id":"O-203"},
+    {"shipment_id":"S-101","order_id":"O-204"}
+  ]
+}
