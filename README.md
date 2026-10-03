@@ -10,7 +10,7 @@ In the synthetic fixture, two late inputs affect the same order. Summing full or
 
 Moving S-101's arrival to 6 October reduces exposure to **INR 1,200,000**. O-202 recovers, but O-201 remains exposed because S-102 is still late. This is a hypothetical reduction in exposure, not guaranteed savings or predicted revenue loss.
 
-The data model and these acceptance checks have been executed in Snowflake through CoCo CLI. See [deployment evidence](DEPLOYMENT_VALIDATION.md) for actual SQL, outputs, and query IDs. The live application deployment and AI runtime validation remain in progress until APP_VALIDATION.md records them. No hackathon submission has been made yet.
+The data model and these acceptance checks have been executed in Snowflake through CoCo CLI. See [deployment evidence](DEPLOYMENT_VALIDATION.md) for actual SQL, outputs, and query IDs. CoCo deployed the Streamlit object and verified four AI classification cases. Browser startup then exposed a Python package-resolution error; deployment repair and end-to-end UI validation remain pending. See [application validation](APP_VALIDATION.md). No hackathon submission has been made yet.
 
 ## Run the local demonstration
 
@@ -51,7 +51,7 @@ A Snowflake-hosted app requires account access. Provide the public source reposi
 
 ## Question flow
 
-The proposed live question path calls Snowflake AI_COMPLETE to choose a bounded analysis: exposure, evidence, metric definition, or duplicate-counting audit. The response may optionally choose one existing customer. The application validates that output and calculates the answer from retrieved source records. It never executes model-generated SQL or uses model-generated amounts.
+The implemented live question path calls Snowflake AI_COMPLETE to choose a bounded analysis: exposure, evidence, metric definition, or duplicate-counting audit. The response may optionally choose one existing customer. The application validates that output and calculates the answer from retrieved source records. It never executes model-generated SQL or uses model-generated amounts.
 
 Examples:
 
@@ -59,7 +59,7 @@ Examples:
 - Why is Northstar Mobility exposed?
 - Why does a naive join overstate exposure?
 
-Unsupported requests, unknown customers, malformed model output, unavailable AI models, and forecasting questions produce an explicit error or clarification. There is no silent fallback to a fabricated live answer. Live model availability and these routes must be confirmed in APP_VALIDATION.md before representing the AI flow as verified.
+Unsupported requests, unknown customers, malformed model output, unavailable AI models, and forecasting questions produce an explicit error or clarification. There is no silent fallback to a fabricated live answer. CoCo verified model availability and four classifications in APP_VALIDATION.md; the browser workflow is awaiting deployment repair.
 
 ## Model and definitions
 
