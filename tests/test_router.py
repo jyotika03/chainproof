@@ -21,3 +21,16 @@ class RouterTests(unittest.TestCase):
     def test_markdown_fenced_json_is_accepted(self):
         fenced = '```json\n{"intent":"exposure","customer":null}\n```'
         self.assertEqual(parse_route(fenced, [])['intent'], 'exposure')
+    def test_snowpark_json_encoded_fenced_response(self):
+        # AI_COMPLETE in Snowpark returns a JSON-encoded string wrapping fenced JSON
+        encoded = '"```json\\n{\\n  \\"intent\\": \\"exposure\\",\\n  \\"customer\\": null\\n}\\n```"'
+        result = parse_route(encoded, [])
+        self.assertEqual(result['intent'], 'exposure')
+        self.assertIsNone(result['customer'])
+    def test_snowpark_json_encoded_plain_response(self):
+        encoded = '"{\\"intent\\":\\"evidence\\",\\"customer\\":\\"Northstar Mobility\\"}"'
+        self.assertEqual(parse_route(encoded, ['Northstar Mobility'])['customer'], 'Northstar Mobility')
+    def test_snowpark_double_encoded_extra_field_rejected(self):
+        encoded = '"{\\"intent\\":\\"exposure\\",\\"customer\\":null,\\"sql\\":\\"drop table\\"}"'
+        with self.assertRaises(ValueError):
+            parse_route(encoded, [])
